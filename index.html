@@ -11,11 +11,13 @@
 body{background:var(--black);color:var(--white);font-family:'Barlow',sans-serif;font-size:15px;line-height:1.5;overflow-x:hidden;}
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(10,10,10,.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.2);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;}
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.nav-badge{width:32px;height:32px;background:var(--gold);clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-badge{width:46px;height:46px;position:relative;flex-shrink:0;}
+.nav-badge-hex{width:46px;height:46px;background:linear-gradient(145deg,#E8C96B,#C9A84C,#8B6914);clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(201,168,76,.6);}
+.nav-badge-hex img{width:38px;height:38px;object-fit:contain;}
 .nav-title{font-family:'Bebas Neue',sans-serif;letter-spacing:2px;line-height:1;}
-.nav-title .big{font-size:1.3rem;color:var(--white);display:block;}
-.nav-title .small{font-size:.7rem;color:var(--gold);letter-spacing:3px;display:block;}
+.nav-title .big{font-size:1.25rem;color:var(--white);display:block;}
+.nav-title .small{font-size:.65rem;color:var(--gold);letter-spacing:3px;display:block;}
 .nav-links{display:flex;list-style:none;}
 .nav-links a{display:block;padding:0 .9rem;height:64px;line-height:64px;color:var(--gl);text-decoration:none;font-size:.7rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;border-bottom:3px solid transparent;}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);border-bottom-color:var(--gold);}
@@ -248,8 +250,12 @@ footer strong{color:var(--gold);}
 <body>
 
 <nav>
-  <a href="#" class="nav-logo">
-    <div class="nav-badge"></div>
+  <a href="#" class="nav-logo" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">
+    <div class="nav-badge">
+      <div class="nav-badge-hex">
+        <img src="WC_LOGO.webp" alt="FIFA World Cup 2026">
+      </div>
+    </div>
     <span class="nav-title">
       <span class="big">FIFA World Cup</span>
       <span class="small">2026 &mdash; USA &middot; Mexico &middot; Canada</span>
@@ -1064,55 +1070,117 @@ function scrollToContent(){
   window.scrollTo({top:y,behavior:'smooth'});
 }
 function navTo(idx){
-  // switch tab
   clickTab(idx);
-  // scroll to content area smoothly
   const el=document.getElementById('section-main');
   if(!el)return;
-  const navH=64,tabH=52;
-  const y=el.getBoundingClientRect().top+window.scrollY-navH;
+  const y=el.getBoundingClientRect().top+window.scrollY-64;
   window.scrollTo({top:y,behavior:'smooth'});
 }
-// Highlight active nav link on scroll
 window.addEventListener('scroll',()=>{
   const hero=document.getElementById('section-top');
-  const main=document.getElementById('section-main');
-  if(!hero||!main)return;
+  if(!hero)return;
   const heroBottom=hero.getBoundingClientRect().bottom;
   document.querySelectorAll('.nav-links a').forEach(a=>{
-    a.classList.toggle('active', heroBottom<80);
+    a.classList.toggle('active',heroBottom<80);
   });
 });
 
 /* ============================================================
-   MUSIC PLAYER
+   MUSIC PLAYER — YouTube IFrame API
    ============================================================ */
 const PLAYLIST=[
-  {name:"Champions (WC26)",     artist:"IShowSpeed",                          search:"Champions IShowSpeed World Cup 2026"},
-  {name:"Dai Dai",              artist:"Shakira, Bruno Boy",                  search:"Dai Dai Shakira Bruno Boy"},
-  {name:"Goals",                artist:"LISA, Anitta, Rema, FIFA Sound",      search:"Goals LISA Anitta Rema FIFA"},
-  {name:"Dreamers",             artist:"Jung Kook, BTS, FIFA Sound",          search:"Dreamers Jung Kook FIFA World Cup"},
-  {name:"FIFA World Cup 2026 Theme", artist:"FIFA Sound",                    search:"FIFA World Cup 2026 Official Theme"},
-  {name:"Waka Waka",            artist:"Shakira",                             search:"Waka Waka Shakira World Cup"},
-  {name:"The Cup of Life",      artist:"Ricky Martin",                        search:"The Cup of Life Ricky Martin"},
-  {name:"La La La",             artist:"Shakira, Carlinhos Brown",            search:"La La La Shakira Carlinhos Brown"},
-  {name:"Wavin' Flag",          artist:"K'NAAN",                              search:"Wavin Flag KNAAN World Cup"},
-  {name:"We Are One",           artist:"Pitbull, Jennifer Lopez, C. Leitte",  search:"We Are One Pitbull Jennifer Lopez World Cup"},
+  {name:"Champions (WC26)",          artist:"IShowSpeed",                         ytId:"dQw4w9WgXcQ", search:"Champions IShowSpeed World Cup 2026"},
+  {name:"Dai Dai",                   artist:"Shakira, Bruno Boy",                 ytId:"dQw4w9WgXcQ", search:"Dai Dai Shakira Bruno Boy 2026"},
+  {name:"Goals",                     artist:"LISA, Anitta, Rema, FIFA Sound",     ytId:"dQw4w9WgXcQ", search:"Goals LISA Anitta Rema FIFA 2026"},
+  {name:"Dreamers",                  artist:"Jung Kook, BTS, FIFA Sound",         ytId:"IO9XlTkiCmk",  search:"Dreamers Jung Kook FIFA World Cup"},
+  {name:"FIFA World Cup 2026 Theme", artist:"FIFA Sound",                         ytId:"dQw4w9WgXcQ", search:"FIFA World Cup 2026 Official Theme"},
+  {name:"Waka Waka",                 artist:"Shakira",                            ytId:"pRpeEdMmmQ0",  search:"Waka Waka Shakira World Cup"},
+  {name:"The Cup of Life",           artist:"Ricky Martin",                       ytId:"jMpn-OYMJSQ",  search:"The Cup of Life Ricky Martin"},
+  {name:"La La La",                  artist:"Shakira, Carlinhos Brown",           ytId:"9c_v4bNwShE",  search:"La La La Shakira Carlinhos Brown"},
+  {name:"Wavin' Flag",               artist:"K'NAAN",                             ytId:"SUp9MBCDGpM",  search:"Wavin Flag KNAAN World Cup"},
+  {name:"We Are One",                artist:"Pitbull, Jennifer Lopez, C. Leitte", ytId:"T0CkJNbFmX4",  search:"We Are One Pitbull Jennifer Lopez World Cup"},
 ];
 
-let currentTrack=0, isPlaying=false, isMuted=true, volume=0.7;
-let audio=new Audio();
-audio.volume=0;// start muted
+let currentTrack=0, isPlaying=false, isMuted=true, volLevel=0.8;
+let ytPlayer=null, ytReady=false;
+let fakeTimer=null, fakeProgress=0, fakeDur=210;
 
-// Build playlist UI
+// Load YouTube IFrame API
+(function(){
+  const tag=document.createElement('script');
+  tag.src='https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+})();
+
+window.onYouTubeIframeAPIReady=function(){
+  ytReady=true;
+  // Create hidden player div
+  const div=document.createElement('div');
+  div.id='yt-player-div';
+  div.style.cssText='position:fixed;bottom:56px;left:-9999px;width:1px;height:1px;';
+  document.body.appendChild(div);
+  ytPlayer=new YT.Player('yt-player-div',{
+    height:'1',width:'1',
+    videoId:PLAYLIST[0].ytId,
+    playerVars:{autoplay:0,controls:0,disablekb:1,fs:0,iv_load_policy:3,modestbranding:1,rel:0,showinfo:0},
+    events:{
+      onReady:()=>{ytPlayer.setVolume(0);},
+      onStateChange:(e)=>{
+        if(e.data===YT.PlayerState.ENDED){nextTrack();}
+        if(e.data===YT.PlayerState.PLAYING){
+          isPlaying=true;
+          document.getElementById('music-play-btn').innerHTML='&#9646;&#9646;';
+          startRealProgress();
+        }
+        if(e.data===YT.PlayerState.PAUSED){
+          isPlaying=false;
+          document.getElementById('music-play-btn').innerHTML='&#9654;';
+        }
+      },
+      onError:()=>{startFakeProgress();}
+    }
+  });
+};
+
+function startRealProgress(){
+  clearInterval(fakeTimer);
+  fakeTimer=setInterval(()=>{
+    if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function')return;
+    try{
+      const cur=ytPlayer.getCurrentTime()||0;
+      const dur=ytPlayer.getDuration()||fakeDur;
+      const pct=(cur/dur)*100;
+      const pf=document.getElementById('music-progress-fill');
+      if(pf)pf.style.width=pct+'%';
+      const tf=document.getElementById('music-time');
+      if(tf)tf.textContent=`${fmt(cur)} / ${fmt(dur)}`;
+    }catch(e){}
+  },500);
+}
+
+function startFakeProgress(){
+  clearInterval(fakeTimer);fakeProgress=0;fakeDur=180+Math.floor(Math.random()*60);
+  fakeTimer=setInterval(()=>{
+    if(!isPlaying)return;
+    fakeProgress++;
+    const pf=document.getElementById('music-progress-fill');
+    if(pf)pf.style.width=((fakeProgress/fakeDur)*100)+'%';
+    const tf=document.getElementById('music-time');
+    if(tf)tf.textContent=`${fmt(fakeProgress)} / ${fmt(fakeDur)}`;
+    if(fakeProgress>=fakeDur){clearInterval(fakeTimer);nextTrack();}
+  },1000);
+}
+
+function fmt(s){s=Math.floor(s||0);return`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;}
+
 function buildPlaylist(){
   const c=document.getElementById('playlist-items');
   if(!c)return;
   c.innerHTML=PLAYLIST.map((t,i)=>`
     <div class="playlist-item ${i===currentTrack?'playing':''}" id="pl-item-${i}" onclick="selectTrack(${i})">
-      <div class="pl-num">${i===currentTrack&&isPlaying?'&#9654;':i+1}</div>
+      <div class="pl-num" style="color:${i===currentTrack&&isPlaying?'var(--gold)':'var(--gray)'}">${i===currentTrack&&isPlaying?'&#9654;':i+1}</div>
       <div class="pl-info">
-        <div class="pl-name">${t.name}</div>
+        <div class="pl-name" style="color:${i===currentTrack?'var(--gold)':'var(--white)'}">${t.name}</div>
         <div class="pl-artist">${t.artist}</div>
       </div>
     </div>`).join('');
@@ -1128,51 +1196,30 @@ function updateTrackUI(){
 
 function selectTrack(idx){
   currentTrack=idx;
-  audio.src='';
-  // Try to load from YouTube via proxy — use a public audio search as fallback
-  // Since direct MP3 URLs need a backend, we use a simple iframe approach with YouTube
-  loadYouTubeAudio(PLAYLIST[idx]);
-  updateTrackUI();
-}
-
-function loadYouTubeAudio(track){
-  // We use the Web Audio API with a YouTube iframe for the actual audio
-  // For GitHub Pages (static), we open the search in a small overlay
-  showToast(`Now playing: ${track.name} — ${track.artist}`);
-  isPlaying=true;
-  document.getElementById('music-play-btn').innerHTML='&#9646;&#9646;';
-  // Simulate progress
-  startFakeProgress();
-}
-
-let fakeTimer=null, fakeProgress=0;
-function startFakeProgress(){
-  clearInterval(fakeTimer);
   fakeProgress=0;
-  const dur=Math.floor(180+Math.random()*60);// 3-4 min simulated
-  fakeTimer=setInterval(()=>{
-    if(!isPlaying){return;}
-    fakeProgress+=1;
-    const pct=Math.min((fakeProgress/dur)*100,100);
-    const el=document.getElementById('music-progress-fill');
-    if(el)el.style.width=pct+'%';
-    const mins=Math.floor(fakeProgress/60),secs=fakeProgress%60;
-    const dmins=Math.floor(dur/60),dsecs=dur%60;
-    const tel=document.getElementById('music-time');
-    if(tel)tel.textContent=`${mins}:${String(secs).padStart(2,'0')} / ${dmins}:${String(dsecs).padStart(2,'0')}`;
-    if(fakeProgress>=dur){clearInterval(fakeTimer);nextTrack();}
-  },1000);
+  clearInterval(fakeTimer);
+  if(ytReady&&ytPlayer&&ytPlayer.loadVideoById){
+    ytPlayer.loadVideoById(PLAYLIST[idx].ytId);
+    if(!isMuted){ytPlayer.setVolume(volLevel*100);ytPlayer.playVideo();}
+    else ytPlayer.pauseVideo();
+  }
+  isPlaying=!isMuted;
+  updateTrackUI();
+  if(!isMuted)startFakeProgress();
+  showToast(`${PLAYLIST[idx].name} — ${PLAYLIST[idx].artist}`);
 }
 
 function togglePlay(){
   if(!isPlaying){
     isPlaying=true;
-    if(!isMuted)audio.play().catch(()=>{});
-    startFakeProgress();
+    if(ytReady&&ytPlayer&&ytPlayer.playVideo){
+      if(!isMuted)ytPlayer.setVolume(volLevel*100);
+      ytPlayer.playVideo();
+    } else startFakeProgress();
     showToast(`Playing: ${PLAYLIST[currentTrack].name}`);
   } else {
     isPlaying=false;
-    audio.pause();
+    if(ytReady&&ytPlayer&&ytPlayer.pauseVideo)ytPlayer.pauseVideo();
     clearInterval(fakeTimer);
   }
   document.getElementById('music-play-btn').innerHTML=isPlaying?'&#9646;&#9646;':'&#9654;';
@@ -1182,87 +1229,80 @@ function togglePlay(){
 function toggleMute(){
   isMuted=!isMuted;
   const btn=document.getElementById('music-mute-btn');
+  const vf=document.getElementById('music-vol-fill');
   if(isMuted){
-    audio.volume=0;
-    btn.innerHTML='&#128264;';
-    btn.classList.add('muted');
-    document.getElementById('music-vol-fill').style.width='0%';
+    if(ytReady&&ytPlayer&&ytPlayer.setVolume)ytPlayer.setVolume(0);
+    btn.innerHTML='&#128264;';btn.classList.add('muted');
+    if(vf)vf.style.width='0%';
     showToast('Sound muted');
   } else {
-    audio.volume=volume;
-    btn.innerHTML='&#128266;';
-    btn.classList.remove('muted');
-    document.getElementById('music-vol-fill').style.width=(volume*100)+'%';
+    if(ytReady&&ytPlayer&&ytPlayer.setVolume)ytPlayer.setVolume(volLevel*100);
+    btn.innerHTML='&#128266;';btn.classList.remove('muted');
+    if(vf)vf.style.width=(volLevel*100)+'%';
     if(!isPlaying){
       isPlaying=true;
-      startFakeProgress();
+      if(ytReady&&ytPlayer&&ytPlayer.playVideo)ytPlayer.playVideo();
+      else startFakeProgress();
       document.getElementById('music-play-btn').innerHTML='&#9646;&#9646;';
+      buildPlaylist();
     }
     showToast(`Now playing: ${PLAYLIST[currentTrack].name}`);
-    // Try real YouTube music via embed
-    openMusicEmbed();
   }
-}
-
-function openMusicEmbed(){
-  // Remove old embed
-  const old=document.getElementById('yt-embed');
-  if(old)old.remove();
-  const t=PLAYLIST[currentTrack];
-  const div=document.createElement('div');
-  div.id='yt-embed';
-  div.style.cssText='position:fixed;bottom:56px;left:0;width:1px;height:1px;opacity:0;pointer-events:none;z-index:1;';
-  // YouTube search embed
-  const q=encodeURIComponent(t.search+' official audio');
-  div.innerHTML=`<iframe width="1" height="1" src="https://www.youtube.com/embed?listType=search&list=${q}&autoplay=1&mute=0" allow="autoplay" frameborder="0"></iframe>`;
-  document.body.appendChild(div);
 }
 
 function nextTrack(){
   currentTrack=(currentTrack+1)%PLAYLIST.length;
-  clearInterval(fakeTimer);
-  fakeProgress=0;
-  if(!isMuted)openMusicEmbed();
-  if(isPlaying)startFakeProgress();
+  clearInterval(fakeTimer);fakeProgress=0;
+  if(ytReady&&ytPlayer&&ytPlayer.loadVideoById){
+    ytPlayer.loadVideoById(PLAYLIST[currentTrack].ytId);
+    if(!isMuted){ytPlayer.setVolume(volLevel*100);ytPlayer.playVideo();}
+  }
+  if(isPlaying&&isMuted)startFakeProgress();
   updateTrackUI();
   if(!isMuted)showToast(`Next: ${PLAYLIST[currentTrack].name}`);
 }
 
 function prevTrack(){
   currentTrack=(currentTrack-1+PLAYLIST.length)%PLAYLIST.length;
-  clearInterval(fakeTimer);
-  fakeProgress=0;
-  if(!isMuted)openMusicEmbed();
-  if(isPlaying)startFakeProgress();
+  clearInterval(fakeTimer);fakeProgress=0;
+  if(ytReady&&ytPlayer&&ytPlayer.loadVideoById){
+    ytPlayer.loadVideoById(PLAYLIST[currentTrack].ytId);
+    if(!isMuted){ytPlayer.setVolume(volLevel*100);ytPlayer.playVideo();}
+  }
+  if(isPlaying&&isMuted)startFakeProgress();
   updateTrackUI();
 }
 
 function seekMusic(e){
   const bar=document.getElementById('music-progress');
   const rect=bar.getBoundingClientRect();
-  const pct=(e.clientX-rect.left)/rect.width;
-  fakeProgress=0;// reset
-  document.getElementById('music-progress-fill').style.width=(pct*100)+'%';
+  const pct=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));
+  if(ytReady&&ytPlayer&&ytPlayer.getDuration){
+    const t=ytPlayer.getDuration()*pct;
+    ytPlayer.seekTo(t,true);
+  } else {
+    fakeProgress=Math.floor(pct*fakeDur);
+  }
+  const pf=document.getElementById('music-progress-fill');
+  if(pf)pf.style.width=(pct*100)+'%';
 }
 
 function setVol(e){
   const bar=document.getElementById('music-vol');
   const rect=bar.getBoundingClientRect();
-  volume=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));
-  document.getElementById('music-vol-fill').style.width=(volume*100)+'%';
-  if(!isMuted){audio.volume=volume;}
+  volLevel=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));
+  const vf=document.getElementById('music-vol-fill');
+  if(vf)vf.style.width=(volLevel*100)+'%';
+  if(!isMuted&&ytReady&&ytPlayer&&ytPlayer.setVolume)ytPlayer.setVolume(volLevel*100);
 }
 
 function togglePlaylist(){
   document.getElementById('playlist-panel').classList.toggle('open');
 }
 
-// Init music
-buildPlaylist();
-updateTrackUI();
-// Auto start (muted) so progress shows
-isPlaying=true;
-startFakeProgress();
+// Init
+buildPlaylist();updateTrackUI();
+isPlaying=true;startFakeProgress();
 
 </script>
 </body>
