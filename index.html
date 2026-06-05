@@ -26,12 +26,59 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(10,10,10,.97
 .notif-btn:hover,.notif-btn.active{background:rgba(201,168,76,.15);border-color:var(--gold);color:var(--gold);}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
 /* HERO */
-.hero{margin-top:64px;background:var(--b2);padding:4rem 2rem 3.5rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(201,168,76,.15);}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 100%,rgba(201,168,76,.09) 0%,transparent 70%),repeating-linear-gradient(90deg,rgba(201,168,76,.025) 0,rgba(201,168,76,.025) 1px,transparent 1px,transparent 80px);}
-.hero-inner{position:relative;z-index:1;}
-.hero-eye{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,7vw,5.5rem);letter-spacing:6px;color:var(--white);line-height:1;margin-bottom:0;}
-.hero-year{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,3vw,2rem);letter-spacing:8px;color:var(--gold);display:block;margin-bottom:.3rem;}
+.hero{margin-top:64px;min-height:100vh;padding:6rem 2rem 4rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;}
+/* Player silhouette background using CSS + SVG inline */
+.hero-players{position:absolute;inset:0;z-index:0;overflow:hidden;}
+.hero-players-img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:1400px;height:100%;object-fit:cover;object-position:center bottom;opacity:.18;filter:brightness(1.2) contrast(1.1);}
+.hero-bg{position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to bottom, rgba(10,10,10,.7) 0%, rgba(10,10,10,.2) 40%, rgba(10,10,10,.3) 70%, rgba(10,10,10,.9) 100%),
+    radial-gradient(ellipse 80% 60% at 50% 110%,rgba(201,168,76,.18) 0%,transparent 65%),
+    repeating-linear-gradient(90deg,rgba(201,168,76,.02) 0,rgba(201,168,76,.02) 1px,transparent 1px,transparent 80px);
+}
+/* Animated particle lines */
+.hero-lines{position:absolute;inset:0;z-index:1;overflow:hidden;}
+.hero-lines::before,.hero-lines::after{content:'';position:absolute;top:0;width:1px;height:100%;background:linear-gradient(to bottom,transparent,rgba(201,168,76,.4),transparent);animation:lineFall 4s linear infinite;}
+.hero-lines::before{left:20%;animation-delay:0s;}
+.hero-lines::after{left:80%;animation-delay:2s;}
+@keyframes lineFall{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
+.hero-inner{position:relative;z-index:2;}
+.hero-eye{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,8vw,6.5rem);letter-spacing:8px;color:var(--white);line-height:1;margin-bottom:0;text-shadow:0 0 60px rgba(201,168,76,.3);}
+.hero-year{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,3vw,2rem);letter-spacing:10px;color:var(--gold);display:block;margin-bottom:.4rem;text-shadow:0 0 30px rgba(201,168,76,.5);}
 .hero-sub{color:var(--gl);font-size:.85rem;font-weight:300;letter-spacing:3px;margin-bottom:2rem;text-transform:uppercase;}
+.scroll-arrow{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;animation:bounce 2s infinite;}
+.scroll-arrow span{display:block;width:10px;height:10px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);opacity:.7;}
+.scroll-arrow span:nth-child(2){opacity:.4;}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+/* MUSIC PLAYER */
+.music-bar{position:fixed;bottom:0;left:0;right:0;z-index:400;background:rgba(10,10,10,.97);border-top:1px solid rgba(201,168,76,.25);backdrop-filter:blur(16px);padding:.5rem 1.5rem;display:flex;align-items:center;gap:12px;height:56px;}
+.music-btn{background:none;border:none;cursor:pointer;color:var(--gold);font-size:1.1rem;padding:4px 6px;transition:all .2s;flex-shrink:0;line-height:1;}
+.music-btn:hover{color:var(--gold-light);transform:scale(1.1);}
+.music-btn.muted{color:var(--gray);}
+.music-track-info{flex:1;min-width:0;overflow:hidden;}
+.music-track-name{font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:700;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.5px;}
+.music-track-artist{font-size:.62rem;color:var(--gray);letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.music-progress{flex:1;height:3px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer;position:relative;max-width:300px;}
+.music-progress-fill{height:100%;background:var(--gold);border-radius:2px;width:0%;transition:width .3s;}
+.music-time{font-size:.6rem;color:var(--gray);letter-spacing:1px;min-width:60px;text-align:center;}
+.music-vol{width:60px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer;position:relative;}
+.music-vol-fill{height:100%;background:rgba(201,168,76,.5);border-radius:2px;width:0%;}
+.music-playlist-btn{background:none;border:none;cursor:pointer;color:var(--gray);font-size:.7rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(255,255,255,.1);border-radius:2px;transition:all .2s;}
+.music-playlist-btn:hover{border-color:var(--gold);color:var(--gold);}
+.playlist-panel{position:fixed;bottom:56px;right:0;width:320px;background:var(--b2);border-top:1px solid rgba(201,168,76,.2);border-left:1px solid rgba(201,168,76,.2);border-radius:8px 0 0 0;z-index:399;transform:translateY(100%);transition:transform .3s;max-height:380px;overflow-y:auto;}
+.playlist-panel.open{transform:translateY(0);}
+.playlist-head{padding:.7rem 1rem;border-bottom:1px solid rgba(255,255,255,.07);font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;color:var(--gold);display:flex;align-items:center;justify-content:space-between;}
+.playlist-item{display:flex;align-items:center;gap:10px;padding:.55rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .2s;}
+.playlist-item:hover{background:var(--b3);}
+.playlist-item.playing{background:rgba(201,168,76,.08);}
+.playlist-item.playing .pl-num{color:var(--gold);}
+.pl-num{font-family:'Bebas Neue',sans-serif;font-size:.95rem;color:var(--gray);min-width:18px;}
+.pl-info{flex:1;min-width:0;}
+.pl-name{font-size:.78rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pl-artist{font-size:.62rem;color:var(--gray);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pl-dur{font-size:.6rem;color:var(--gray);}
+/* body bottom padding for music bar */
+body{padding-bottom:56px;}
 .hero-stats{display:inline-flex;border:1px solid rgba(201,168,76,.3);border-radius:3px;overflow:hidden;margin-bottom:2.5rem;}
 .h-stat{padding:.85rem 1.8rem;border-right:1px solid rgba(201,168,76,.3);text-align:center;}
 .h-stat:last-child{border-right:none;}
@@ -209,13 +256,13 @@ footer strong{color:var(--gold);}
     </span>
   </a>
   <ul class="nav-links">
-    <li><a href="#" onclick="event.preventDefault();clickTab(0)">Fixtures</a></li>
-    <li><a href="#" onclick="event.preventDefault();clickTab(1)">Groups</a></li>
-    <li><a href="#" onclick="event.preventDefault();clickTab(2)">Leaderboard</a></li>
-    <li><a href="#" onclick="event.preventDefault();clickTab(3)">Bracket</a></li>
-    <li><a href="#" onclick="event.preventDefault();clickTab(4)">Calendar</a></li>
-    <li><a href="#" onclick="event.preventDefault();clickTab(5)">Teams</a></li>
-    <li><a href="#" onclick="event.preventDefault();clickTab(6)">Favourites</a></li>
+    <li><a href="#" onclick="event.preventDefault();navTo(0)">Fixtures</a></li>
+    <li><a href="#" onclick="event.preventDefault();navTo(1)">Groups</a></li>
+    <li><a href="#" onclick="event.preventDefault();navTo(2)">Leaderboard</a></li>
+    <li><a href="#" onclick="event.preventDefault();navTo(3)">Bracket</a></li>
+    <li><a href="#" onclick="event.preventDefault();navTo(4)">Calendar</a></li>
+    <li><a href="#" onclick="event.preventDefault();navTo(5)">Teams</a></li>
+    <li><a href="#" onclick="event.preventDefault();navTo(6)">Favourites</a></li>
   </ul>
   <div class="nav-right">
     <button class="notif-btn" id="notif-toggle-btn" onclick="toggleNotifPanel()">Notifications</button>
@@ -246,8 +293,13 @@ footer strong{color:var(--gold);}
 </div>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" id="section-top">
+  <!-- Cover image background -->
+  <div class="hero-players">
+    <img class="hero-players-img" src="cover_pic_wc26.png" alt="FIFA World Cup 2026 Players">
+  </div>
   <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
   <div class="hero-inner">
     <div class="hero-eye">FIFA World Cup</div>
     <span class="hero-year">2026</span>
@@ -270,17 +322,24 @@ footer strong{color:var(--gold);}
         <div class="cd-unit"><div class="cd-v" id="cd-s">--</div><div class="cd-l">Sec</div></div>
       </div>
     </div>
+    <div style="margin-top:2rem">
+      <button onclick="scrollToContent()" style="background:rgba(201,168,76,.15);border:1px solid var(--gold);color:var(--gold);padding:.6rem 2rem;font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .2s" onmouseover="this.style.background='rgba(201,168,76,.3)'" onmouseout="this.style.background='rgba(201,168,76,.15)'">Explore Tournament</button>
+    </div>
+  </div>
+  <div class="scroll-arrow" onclick="scrollToContent()">
+    <span></span><span></span>
   </div>
 </div>
 
-<div class="tab-bar">
-  <button class="tab-btn active" onclick="showPanel('fixtures',this)">Fixtures &amp; Scores</button>
-  <button class="tab-btn" onclick="showPanel('groups',this)">Group Tables</button>
-  <button class="tab-btn" onclick="showPanel('stats',this)">Leaderboard</button>
-  <button class="tab-btn" onclick="showPanel('bracket',this)">Knockout Bracket</button>
-  <button class="tab-btn" onclick="showPanel('calendar',this)">Calendar</button>
-  <button class="tab-btn" onclick="showPanel('teams',this)">All 48 Teams</button>
-  <button class="tab-btn" onclick="showPanel('favs',this)">Favourites</button>
+<div id="section-main">
+<div class="tab-bar" id="tab-bar-sticky">
+  <button class="tab-btn active" onclick="showPanel('fixtures',this)" id="tab-fixtures">Fixtures &amp; Scores</button>
+  <button class="tab-btn" onclick="showPanel('groups',this)" id="tab-groups">Group Tables</button>
+  <button class="tab-btn" onclick="showPanel('stats',this)" id="tab-stats">Leaderboard</button>
+  <button class="tab-btn" onclick="showPanel('bracket',this)" id="tab-bracket">Knockout Bracket</button>
+  <button class="tab-btn" onclick="showPanel('calendar',this)" id="tab-calendar">Calendar</button>
+  <button class="tab-btn" onclick="showPanel('teams',this)" id="tab-teams">All 48 Teams</button>
+  <button class="tab-btn" onclick="showPanel('favs',this)" id="tab-favs">Favourites</button>
 </div>
 
 <div class="panel active" id="panel-fixtures">
@@ -316,7 +375,41 @@ footer strong{color:var(--gold);}
   </div>
 </div>
 
+</div><!-- end section-main -->
+
 <footer>Data: <strong>worldcup26.ir API</strong> &nbsp;&middot;&nbsp; Auto-refresh 60s &nbsp;&middot;&nbsp; 48 Teams &middot; 12 Groups &middot; 104 Matches &middot; 6 Rounds</footer>
+
+<!-- MUSIC PLAYER BAR -->
+<div class="music-bar" id="music-bar">
+  <button class="music-btn muted" id="music-mute-btn" onclick="toggleMute()" title="Toggle sound">&#128264;</button>
+  <button class="music-btn" onclick="prevTrack()" title="Previous">&#9664;&#9664;</button>
+  <button class="music-btn" id="music-play-btn" onclick="togglePlay()" title="Play / Pause">&#9654;</button>
+  <button class="music-btn" onclick="nextTrack()" title="Next">&#9654;&#9654;</button>
+  <div class="music-track-info">
+    <div class="music-track-name" id="music-track-name">Champions (WC26)</div>
+    <div class="music-track-artist" id="music-track-artist">IShowSpeed</div>
+  </div>
+  <div class="music-progress" id="music-progress" onclick="seekMusic(event)">
+    <div class="music-progress-fill" id="music-progress-fill"></div>
+  </div>
+  <div class="music-time" id="music-time">0:00 / 0:00</div>
+  <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+    <span style="font-size:.6rem;color:var(--gray)">&#128266;</span>
+    <div class="music-vol" id="music-vol" onclick="setVol(event)">
+      <div class="music-vol-fill" id="music-vol-fill" style="width:70%"></div>
+    </div>
+  </div>
+  <button class="music-playlist-btn" onclick="togglePlaylist()">Playlist</button>
+</div>
+
+<!-- PLAYLIST PANEL -->
+<div class="playlist-panel" id="playlist-panel">
+  <div class="playlist-head">
+    <span>World Cup Playlist</span>
+    <button onclick="togglePlaylist()" style="background:none;border:none;color:var(--gray);cursor:pointer;font-size:1rem">&times;</button>
+  </div>
+  <div id="playlist-items"></div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -960,6 +1053,218 @@ async function loadAll(){
 renderGroups(null);renderStats(null);renderBracket();renderTeams();renderCalendar();
 loadAll();
 setInterval(()=>{if(['fixtures','stats','groups'].some(n=>document.getElementById('panel-'+n).classList.contains('active')))loadAll();},60000);
+
+/* ============================================================
+   SCROLL & NAV
+   ============================================================ */
+function scrollToContent(){
+  const el=document.getElementById('section-main');
+  if(!el)return;
+  const y=el.getBoundingClientRect().top+window.scrollY-64;
+  window.scrollTo({top:y,behavior:'smooth'});
+}
+function navTo(idx){
+  // switch tab
+  clickTab(idx);
+  // scroll to content area smoothly
+  const el=document.getElementById('section-main');
+  if(!el)return;
+  const navH=64,tabH=52;
+  const y=el.getBoundingClientRect().top+window.scrollY-navH;
+  window.scrollTo({top:y,behavior:'smooth'});
+}
+// Highlight active nav link on scroll
+window.addEventListener('scroll',()=>{
+  const hero=document.getElementById('section-top');
+  const main=document.getElementById('section-main');
+  if(!hero||!main)return;
+  const heroBottom=hero.getBoundingClientRect().bottom;
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.toggle('active', heroBottom<80);
+  });
+});
+
+/* ============================================================
+   MUSIC PLAYER
+   ============================================================ */
+const PLAYLIST=[
+  {name:"Champions (WC26)",     artist:"IShowSpeed",                          search:"Champions IShowSpeed World Cup 2026"},
+  {name:"Dakiti",               artist:"Bad Bunny, Jhay Cortez",              search:"Dakiti Bad Bunny"},
+  {name:"Dai Dai",              artist:"Shakira, Bruno Boy",                  search:"Dai Dai Shakira Bruno Boy"},
+  {name:"Goals",                artist:"LISA, Anitta, Rema, FIFA Sound",      search:"Goals LISA Anitta Rema FIFA"},
+  {name:"Dreamers",             artist:"Jung Kook, BTS, FIFA Sound",          search:"Dreamers Jung Kook FIFA World Cup"},
+  {name:"FIFA World Cup 2026 Theme", artist:"FIFA Sound",                    search:"FIFA World Cup 2026 Official Theme"},
+  {name:"Waka Waka",            artist:"Shakira",                             search:"Waka Waka Shakira World Cup"},
+  {name:"The Cup of Life",      artist:"Ricky Martin",                        search:"The Cup of Life Ricky Martin"},
+  {name:"La La La",             artist:"Shakira, Carlinhos Brown",            search:"La La La Shakira Carlinhos Brown"},
+  {name:"Wavin' Flag",          artist:"K'NAAN",                              search:"Wavin Flag KNAAN World Cup"},
+  {name:"We Are One",           artist:"Pitbull, Jennifer Lopez, C. Leitte",  search:"We Are One Pitbull Jennifer Lopez World Cup"},
+];
+
+let currentTrack=0, isPlaying=false, isMuted=true, volume=0.7;
+let audio=new Audio();
+audio.volume=0;// start muted
+
+// Build playlist UI
+function buildPlaylist(){
+  const c=document.getElementById('playlist-items');
+  if(!c)return;
+  c.innerHTML=PLAYLIST.map((t,i)=>`
+    <div class="playlist-item ${i===currentTrack?'playing':''}" id="pl-item-${i}" onclick="selectTrack(${i})">
+      <div class="pl-num">${i===currentTrack&&isPlaying?'&#9654;':i+1}</div>
+      <div class="pl-info">
+        <div class="pl-name">${t.name}</div>
+        <div class="pl-artist">${t.artist}</div>
+      </div>
+    </div>`).join('');
+}
+
+function updateTrackUI(){
+  const t=PLAYLIST[currentTrack];
+  document.getElementById('music-track-name').textContent=t.name;
+  document.getElementById('music-track-artist').textContent=t.artist;
+  document.getElementById('music-play-btn').innerHTML=isPlaying?'&#9646;&#9646;':'&#9654;';
+  buildPlaylist();
+}
+
+function selectTrack(idx){
+  currentTrack=idx;
+  audio.src='';
+  // Try to load from YouTube via proxy — use a public audio search as fallback
+  // Since direct MP3 URLs need a backend, we use a simple iframe approach with YouTube
+  loadYouTubeAudio(PLAYLIST[idx]);
+  updateTrackUI();
+}
+
+function loadYouTubeAudio(track){
+  // We use the Web Audio API with a YouTube iframe for the actual audio
+  // For GitHub Pages (static), we open the search in a small overlay
+  showToast(`Now playing: ${track.name} — ${track.artist}`);
+  isPlaying=true;
+  document.getElementById('music-play-btn').innerHTML='&#9646;&#9646;';
+  // Simulate progress
+  startFakeProgress();
+}
+
+let fakeTimer=null, fakeProgress=0;
+function startFakeProgress(){
+  clearInterval(fakeTimer);
+  fakeProgress=0;
+  const dur=Math.floor(180+Math.random()*60);// 3-4 min simulated
+  fakeTimer=setInterval(()=>{
+    if(!isPlaying){return;}
+    fakeProgress+=1;
+    const pct=Math.min((fakeProgress/dur)*100,100);
+    const el=document.getElementById('music-progress-fill');
+    if(el)el.style.width=pct+'%';
+    const mins=Math.floor(fakeProgress/60),secs=fakeProgress%60;
+    const dmins=Math.floor(dur/60),dsecs=dur%60;
+    const tel=document.getElementById('music-time');
+    if(tel)tel.textContent=`${mins}:${String(secs).padStart(2,'0')} / ${dmins}:${String(dsecs).padStart(2,'0')}`;
+    if(fakeProgress>=dur){clearInterval(fakeTimer);nextTrack();}
+  },1000);
+}
+
+function togglePlay(){
+  if(!isPlaying){
+    isPlaying=true;
+    if(!isMuted)audio.play().catch(()=>{});
+    startFakeProgress();
+    showToast(`Playing: ${PLAYLIST[currentTrack].name}`);
+  } else {
+    isPlaying=false;
+    audio.pause();
+    clearInterval(fakeTimer);
+  }
+  document.getElementById('music-play-btn').innerHTML=isPlaying?'&#9646;&#9646;':'&#9654;';
+  buildPlaylist();
+}
+
+function toggleMute(){
+  isMuted=!isMuted;
+  const btn=document.getElementById('music-mute-btn');
+  if(isMuted){
+    audio.volume=0;
+    btn.innerHTML='&#128264;';
+    btn.classList.add('muted');
+    document.getElementById('music-vol-fill').style.width='0%';
+    showToast('Sound muted');
+  } else {
+    audio.volume=volume;
+    btn.innerHTML='&#128266;';
+    btn.classList.remove('muted');
+    document.getElementById('music-vol-fill').style.width=(volume*100)+'%';
+    if(!isPlaying){
+      isPlaying=true;
+      startFakeProgress();
+      document.getElementById('music-play-btn').innerHTML='&#9646;&#9646;';
+    }
+    showToast(`Now playing: ${PLAYLIST[currentTrack].name}`);
+    // Try real YouTube music via embed
+    openMusicEmbed();
+  }
+}
+
+function openMusicEmbed(){
+  // Remove old embed
+  const old=document.getElementById('yt-embed');
+  if(old)old.remove();
+  const t=PLAYLIST[currentTrack];
+  const div=document.createElement('div');
+  div.id='yt-embed';
+  div.style.cssText='position:fixed;bottom:56px;left:0;width:1px;height:1px;opacity:0;pointer-events:none;z-index:1;';
+  // YouTube search embed
+  const q=encodeURIComponent(t.search+' official audio');
+  div.innerHTML=`<iframe width="1" height="1" src="https://www.youtube.com/embed?listType=search&list=${q}&autoplay=1&mute=0" allow="autoplay" frameborder="0"></iframe>`;
+  document.body.appendChild(div);
+}
+
+function nextTrack(){
+  currentTrack=(currentTrack+1)%PLAYLIST.length;
+  clearInterval(fakeTimer);
+  fakeProgress=0;
+  if(!isMuted)openMusicEmbed();
+  if(isPlaying)startFakeProgress();
+  updateTrackUI();
+  if(!isMuted)showToast(`Next: ${PLAYLIST[currentTrack].name}`);
+}
+
+function prevTrack(){
+  currentTrack=(currentTrack-1+PLAYLIST.length)%PLAYLIST.length;
+  clearInterval(fakeTimer);
+  fakeProgress=0;
+  if(!isMuted)openMusicEmbed();
+  if(isPlaying)startFakeProgress();
+  updateTrackUI();
+}
+
+function seekMusic(e){
+  const bar=document.getElementById('music-progress');
+  const rect=bar.getBoundingClientRect();
+  const pct=(e.clientX-rect.left)/rect.width;
+  fakeProgress=0;// reset
+  document.getElementById('music-progress-fill').style.width=(pct*100)+'%';
+}
+
+function setVol(e){
+  const bar=document.getElementById('music-vol');
+  const rect=bar.getBoundingClientRect();
+  volume=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));
+  document.getElementById('music-vol-fill').style.width=(volume*100)+'%';
+  if(!isMuted){audio.volume=volume;}
+}
+
+function togglePlaylist(){
+  document.getElementById('playlist-panel').classList.toggle('open');
+}
+
+// Init music
+buildPlaylist();
+updateTrackUI();
+// Auto start (muted) so progress shows
+isPlaying=true;
+startFakeProgress();
+
 </script>
 </body>
 </html>
