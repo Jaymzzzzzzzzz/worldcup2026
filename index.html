@@ -523,60 +523,72 @@ function getProb(h,a){const k=`${h}-${a}`,k2=`${a}-${h}`;if(PROBS[k])return PROB
    OFFICIAL FIXTURES — Correct dates from FIFA/Fox Sports
    ============================================================ */
 const FIXTURES=[
-  /* GROUP STAGE — verified from Fox Sports / NBC Sports / Sky Sports */
-  {id:'1',home:'Mexico',away:'South Africa',hs:null,as:null,grp:'A',date:'Thu Jun 11',time:'3:00 PM ET',status:'upcoming',venue:'Estadio Azteca, Mexico City'},
-  {id:'2',home:'South Korea',away:'Czechia',hs:null,as:null,grp:'A',date:'Thu Jun 11',time:'10:00 PM ET',status:'upcoming',venue:'Estadio Akron, Guadalajara'},
-  {id:'3',home:'Canada',away:'Bosnia-Herzegovina',hs:null,as:null,grp:'B',date:'Fri Jun 12',time:'Noon ET',status:'upcoming',venue:'BMO Field, Toronto'},
-  {id:'4',home:'Switzerland',away:'Qatar',hs:null,as:null,grp:'B',date:'Fri Jun 12',time:'3:00 PM ET',status:'upcoming',venue:'MetLife Stadium, New York'},
-  {id:'5',home:'United States',away:'Paraguay',hs:null,as:null,grp:'D',date:'Fri Jun 12',time:'9:00 PM ET',status:'upcoming',venue:'SoFi Stadium, Los Angeles'},
-  {id:'6',home:'Germany',away:'Curaçao',hs:null,as:null,grp:'E',date:'Sat Jun 13',time:'Noon ET',status:'upcoming',venue:'Levi\'s Stadium, San Francisco'},
-  {id:'7',home:'Brazil',away:'Morocco',hs:null,as:null,grp:'C',date:'Sat Jun 13',time:'3:00 PM ET',status:'upcoming',venue:'MetLife Stadium, New York'},
-  {id:'8',home:'Belgium',away:'Egypt',hs:null,as:null,grp:'G',date:'Sat Jun 13',time:'6:00 PM ET',status:'upcoming',venue:'NRG Stadium, Houston'},
-  {id:'9',home:'Argentina',away:'Algeria',hs:null,as:null,grp:'J',date:'Sun Jun 14',time:'Noon ET',status:'upcoming',venue:'Arrowhead Stadium, Kansas City'},
-  {id:'10',home:'Spain',away:'Cape Verde',hs:null,as:null,grp:'H',date:'Sun Jun 14',time:'3:00 PM ET',status:'upcoming',venue:'Mercedes-Benz Stadium, Atlanta'},
-  {id:'11',home:'France',away:'Iraq',hs:null,as:null,grp:'I',date:'Sun Jun 14',time:'9:00 PM ET',status:'upcoming',venue:'Lincoln Financial Field, Philadelphia'},
-  {id:'12',home:'Netherlands',away:'Tunisia',hs:null,as:null,grp:'F',date:'Mon Jun 15',time:'Noon ET',status:'upcoming',venue:'Lumen Field, Seattle'},
-  {id:'13',home:'Portugal',away:'Uzbekistan',hs:null,as:null,grp:'K',date:'Mon Jun 15',time:'3:00 PM ET',status:'upcoming',venue:'Arrowhead Stadium, Kansas City'},
-  {id:'14',home:'England',away:'Croatia',hs:null,as:null,grp:'L',date:'Mon Jun 15',time:'9:00 PM ET',status:'upcoming',venue:'AT&T Stadium, Dallas'},
-  {id:'15',home:'South Africa',away:'Czechia',hs:null,as:null,grp:'A',date:'Tue Jun 16',time:'Noon ET',status:'upcoming',venue:'Estadio Akron, Guadalajara'},
-  {id:'16',home:'Mexico',away:'South Korea',hs:null,as:null,grp:'A',date:'Tue Jun 16',time:'9:00 PM ET',status:'upcoming',venue:'SoFi Stadium, Los Angeles'},
-  {id:'17',home:'Canada',away:'Switzerland',hs:null,as:null,grp:'B',date:'Wed Jun 17',time:'Noon ET',status:'upcoming',venue:'BMO Field, Toronto'},
-  {id:'18',home:'Haiti',away:'Scotland',hs:null,as:null,grp:'C',date:'Wed Jun 17',time:'3:00 PM ET',status:'upcoming',venue:'Gillette Stadium, Boston'},
-  {id:'19',home:'Australia',away:'Türkiye',hs:null,as:null,grp:'D',date:'Wed Jun 17',time:'9:00 PM ET',status:'upcoming',venue:'Levi\'s Stadium, San Francisco'},
-  {id:'20',home:'Ecuador',away:'Ivory Coast',hs:null,as:null,grp:'E',date:'Thu Jun 18',time:'Noon ET',status:'upcoming',venue:'AT&T Stadium, Dallas'},
-  {id:'21',home:'Japan',away:'Sweden',hs:null,as:null,grp:'F',date:'Thu Jun 18',time:'3:00 PM ET',status:'upcoming',venue:'Mercedes-Benz Stadium, Atlanta'},
-  {id:'22',home:'Iran',away:'New Zealand',hs:null,as:null,grp:'G',date:'Thu Jun 18',time:'9:00 PM ET',status:'upcoming',venue:'Lumen Field, Seattle'},
-  {id:'23',home:'Saudi Arabia',away:'Uruguay',hs:null,as:null,grp:'H',date:'Fri Jun 19',time:'Noon ET',status:'upcoming',venue:'Hard Rock Stadium, Miami'},
-  {id:'24',home:'Norway',away:'Senegal',hs:null,as:null,grp:'I',date:'Fri Jun 19',time:'3:00 PM ET',status:'upcoming',venue:'Lincoln Financial Field, Philadelphia'},
-  {id:'25',home:'Bosnia-Herzegovina',away:'Qatar',hs:null,as:null,grp:'B',date:'Fri Jun 19',time:'9:00 PM ET',status:'upcoming',venue:'MetLife Stadium, New York'},
-  {id:'26',home:'Austria',away:'Jordan',hs:null,as:null,grp:'J',date:'Sat Jun 20',time:'Noon ET',status:'upcoming',venue:'AT&T Stadium, Dallas'},
-  {id:'27',home:'Colombia',away:'Congo DR',hs:null,as:null,grp:'K',date:'Sat Jun 20',time:'3:00 PM ET',status:'upcoming',venue:'Gillette Stadium, Boston'},
-  {id:'28',home:'Croatia',away:'Ghana',hs:null,as:null,grp:'L',date:'Sat Jun 20',time:'9:00 PM ET',status:'upcoming',venue:'Levi\'s Stadium, San Francisco'},
-  {id:'29',home:'United States',away:'Australia',hs:null,as:null,grp:'D',date:'Sun Jun 21',time:'Noon ET',status:'upcoming',venue:'MetLife Stadium, New York'},
-  {id:'30',home:'Paraguay',away:'Türkiye',hs:null,as:null,grp:'D',date:'Sun Jun 21',time:'9:00 PM ET',status:'upcoming',venue:'Arrowhead Stadium, Kansas City'},
-  {id:'31',home:'Germany',away:'Ecuador',hs:null,as:null,grp:'E',date:'Mon Jun 22',time:'Noon ET',status:'upcoming',venue:'NRG Stadium, Houston'},
-  {id:'32',home:'Curaçao',away:'Ivory Coast',hs:null,as:null,grp:'E',date:'Mon Jun 22',time:'3:00 PM ET',status:'upcoming',venue:'Hard Rock Stadium, Miami'},
-  {id:'33',home:'Netherlands',away:'Sweden',hs:null,as:null,grp:'F',date:'Mon Jun 22',time:'9:00 PM ET',status:'upcoming',venue:'Mercedes-Benz Stadium, Atlanta'},
-  {id:'34',home:'Japan',away:'Tunisia',hs:null,as:null,grp:'F',date:'Tue Jun 23',time:'Noon ET',status:'upcoming',venue:'Lumen Field, Seattle'},
-  {id:'35',home:'Belgium',away:'Iran',hs:null,as:null,grp:'G',date:'Tue Jun 23',time:'3:00 PM ET',status:'upcoming',venue:'Gillette Stadium, Boston'},
-  {id:'36',home:'Egypt',away:'New Zealand',hs:null,as:null,grp:'G',date:'Tue Jun 23',time:'9:00 PM ET',status:'upcoming',venue:'Levi\'s Stadium, San Francisco'},
-  {id:'37',home:'Spain',away:'Saudi Arabia',hs:null,as:null,grp:'H',date:'Wed Jun 24',time:'Noon ET',status:'upcoming',venue:'Mercedes-Benz Stadium, Atlanta'},
-  {id:'38',home:'Cape Verde',away:'Uruguay',hs:null,as:null,grp:'H',date:'Wed Jun 24',time:'9:00 PM ET',status:'upcoming',venue:'Estadio Akron, Guadalajara'},
-  {id:'39',home:'France',away:'Norway',hs:null,as:null,grp:'I',date:'Thu Jun 25',time:'3:00 PM ET',status:'upcoming',venue:'MetLife Stadium, New York'},
-  {id:'40',home:'Senegal',away:'Iraq',hs:null,as:null,grp:'I',date:'Thu Jun 25',time:'9:00 PM ET',status:'upcoming',venue:'AT&T Stadium, Dallas'},
-  {id:'41',home:'Argentina',away:'Austria',hs:null,as:null,grp:'J',date:'Fri Jun 26',time:'Noon ET',status:'upcoming',venue:'AT&T Stadium, Dallas'},
-  {id:'42',home:'Algeria',away:'Jordan',hs:null,as:null,grp:'J',date:'Fri Jun 26',time:'9:00 PM ET',status:'upcoming',venue:'Hard Rock Stadium, Miami'},
-  {id:'43',home:'Portugal',away:'Colombia',hs:null,as:null,grp:'K',date:'Sat Jun 27',time:'Noon ET',status:'upcoming',venue:'Lincoln Financial Field, Philadelphia'},
-  {id:'44',home:'Uzbekistan',away:'Congo DR',hs:null,as:null,grp:'K',date:'Sat Jun 27',time:'3:00 PM ET',status:'upcoming',venue:'Arrowhead Stadium, Kansas City'},
-  {id:'45',home:'England',away:'Ghana',hs:null,as:null,grp:'L',date:'Sat Jun 27',time:'9:00 PM ET',status:'upcoming',venue:'Gillette Stadium, Boston'},
-  {id:'46',home:'Scotland',away:'Brazil',hs:null,as:null,grp:'C',date:'Sun Jun 28',time:'Noon ET',status:'upcoming',venue:'NRG Stadium, Houston'},
-  {id:'47',home:'Mexico',away:'Czechia',hs:null,as:null,grp:'A',date:'Sun Jun 28',time:'Noon ET',status:'upcoming',venue:'Estadio Azteca, Mexico City'},
-  {id:'48',home:'South Africa',away:'South Korea',hs:null,as:null,grp:'A',date:'Sun Jun 28',time:'9:00 PM ET',status:'upcoming',venue:'Estadio Akron, Guadalajara'},
-  {id:'49',home:'Croatia',away:'Panama',hs:null,as:null,grp:'L',date:'Sun Jun 28',time:'3:00 PM ET',status:'upcoming',venue:'MetLife Stadium, New York'},
-  /* KNOCKOUT — Round of 32 */
-  {id:'k1',home:'2nd Grp A',away:'2nd Grp B',hs:null,as:null,grp:'R32',date:'Sun Jun 28',time:'3:00 PM ET',status:'upcoming',venue:'SoFi Stadium, Los Angeles',ko:true},
-  {id:'kf',home:'Winner SF-1',away:'Winner SF-2',hs:null,as:null,grp:'FINAL',date:'Sun Jul 19',time:'3:00 PM ET',status:'upcoming',venue:'MetLife Stadium, New Jersey',final:true},
+  // GROUP A
+  {id:'1', home:'Mexico',             away:'South Africa',       grp:'A',date:'Thu, Jun 11',time:'12:30 AM IST*',venue:'Estadio Azteca, Mexico City'},
+  {id:'2', home:'South Korea',        away:'Czechia',            grp:'A',date:'Fri, Jun 12',time:'7:30 AM IST',  venue:'Estadio Akron, Guadalajara'},
+  {id:'15',home:'South Africa',       away:'Czechia',            grp:'A',date:'Tue, Jun 16',time:'9:30 PM IST',  venue:'Estadio Akron, Guadalajara'},
+  {id:'16',home:'Mexico',             away:'South Korea',        grp:'A',date:'Wed, Jun 17',time:'6:30 AM IST',  venue:'SoFi Stadium, Los Angeles'},
+  {id:'47',home:'Mexico',             away:'Czechia',            grp:'A',date:'Sun, Jun 28',time:'9:30 PM IST',  venue:'Estadio Azteca, Mexico City'},
+  {id:'48',home:'South Africa',       away:'South Korea',        grp:'A',date:'Mon, Jun 29',time:'6:30 AM IST',  venue:'Estadio Akron, Guadalajara'},
+  // GROUP B
+  {id:'3', home:'Canada',             away:'Bosnia-Herzegovina', grp:'B',date:'Fri, Jun 12',time:'9:30 PM IST',  venue:'BMO Field, Toronto'},
+  {id:'4', home:'Switzerland',        away:'Qatar',              grp:'B',date:'Sat, Jun 13',time:'12:30 AM IST*',venue:'MetLife Stadium, New York'},
+  {id:'17',home:'Canada',             away:'Switzerland',        grp:'B',date:'Wed, Jun 17',time:'9:30 PM IST',  venue:'BMO Field, Toronto'},
+  {id:'25',home:'Bosnia-Herzegovina', away:'Qatar',              grp:'B',date:'Sat, Jun 20',time:'6:30 AM IST',  venue:'MetLife Stadium, New York'},
+  // GROUP C
+  {id:'7', home:'Brazil',             away:'Morocco',            grp:'C',date:'Sat, Jun 13',time:'9:30 PM IST',  venue:'MetLife Stadium, New York'},
+  {id:'18',home:'Haiti',              away:'Scotland',           grp:'C',date:'Wed, Jun 17',time:'12:30 AM IST*',venue:'Gillette Stadium, Boston'},
+  {id:'49',home:'Scotland',           away:'Brazil',             grp:'C',date:'Sun, Jun 28',time:'9:30 PM IST',  venue:'NRG Stadium, Houston'},
+  // GROUP D
+  {id:'5', home:'United States',      away:'Paraguay',           grp:'D',date:'Sat, Jun 13',time:'6:30 AM IST',  venue:'SoFi Stadium, Los Angeles'},
+  {id:'19',home:'Australia',          away:'Türkiye',            grp:'D',date:'Thu, Jun 18',time:'6:30 AM IST',  venue:"Levi's Stadium, San Francisco"},
+  {id:'29',home:'United States',      away:'Australia',          grp:'D',date:'Sun, Jun 21',time:'9:30 PM IST',  venue:'MetLife Stadium, New York'},
+  {id:'30',home:'Paraguay',           away:'Türkiye',            grp:'D',date:'Mon, Jun 22',time:'6:30 AM IST',  venue:'Arrowhead Stadium, Kansas City'},
+  // GROUP E
+  {id:'6', home:'Germany',            away:'Curaçao',            grp:'E',date:'Sat, Jun 13',time:'9:30 PM IST',  venue:"Levi's Stadium, San Francisco"},
+  {id:'20',home:'Ecuador',            away:'Ivory Coast',        grp:'E',date:'Thu, Jun 18',time:'9:30 PM IST',  venue:'AT&T Stadium, Dallas'},
+  {id:'31',home:'Germany',            away:'Ecuador',            grp:'E',date:'Mon, Jun 22',time:'9:30 PM IST',  venue:'NRG Stadium, Houston'},
+  {id:'32',home:'Curaçao',            away:'Ivory Coast',        grp:'E',date:'Tue, Jun 23',time:'12:30 AM IST*',venue:'Hard Rock Stadium, Miami'},
+  // GROUP F
+  {id:'12',home:'Netherlands',        away:'Tunisia',            grp:'F',date:'Mon, Jun 15',time:'9:30 PM IST',  venue:'Lumen Field, Seattle'},
+  {id:'21',home:'Japan',              away:'Sweden',             grp:'F',date:'Fri, Jun 19',time:'12:30 AM IST*',venue:'Mercedes-Benz Stadium, Atlanta'},
+  {id:'33',home:'Netherlands',        away:'Sweden',             grp:'F',date:'Tue, Jun 23',time:'6:30 AM IST',  venue:'Mercedes-Benz Stadium, Atlanta'},
+  {id:'34',home:'Japan',              away:'Tunisia',            grp:'F',date:'Tue, Jun 23',time:'9:30 PM IST',  venue:'Lumen Field, Seattle'},
+  // GROUP G
+  {id:'8', home:'Belgium',            away:'Egypt',              grp:'G',date:'Sun, Jun 14',time:'12:30 AM IST*',venue:'NRG Stadium, Houston'},
+  {id:'22',home:'Iran',               away:'New Zealand',        grp:'G',date:'Fri, Jun 19',time:'6:30 AM IST',  venue:'Lumen Field, Seattle'},
+  {id:'35',home:'Belgium',            away:'Iran',               grp:'G',date:'Wed, Jun 24',time:'12:30 AM IST*',venue:'Gillette Stadium, Boston'},
+  {id:'36',home:'Egypt',              away:'New Zealand',        grp:'G',date:'Wed, Jun 24',time:'6:30 AM IST',  venue:"Levi's Stadium, San Francisco"},
+  // GROUP H
+  {id:'10',home:'Spain',              away:'Cape Verde',         grp:'H',date:'Sun, Jun 14',time:'12:30 AM IST*',venue:'Mercedes-Benz Stadium, Atlanta'},
+  {id:'23',home:'Saudi Arabia',       away:'Uruguay',            grp:'H',date:'Fri, Jun 19',time:'9:30 PM IST',  venue:'Hard Rock Stadium, Miami'},
+  {id:'37',home:'Spain',              away:'Saudi Arabia',       grp:'H',date:'Wed, Jun 24',time:'9:30 PM IST',  venue:'Mercedes-Benz Stadium, Atlanta'},
+  {id:'38',home:'Cape Verde',         away:'Uruguay',            grp:'H',date:'Thu, Jun 25',time:'6:30 AM IST',  venue:'Estadio Akron, Guadalajara'},
+  // GROUP I
+  {id:'11',home:'France',             away:'Iraq',               grp:'I',date:'Mon, Jun 15',time:'6:30 AM IST',  venue:'Lincoln Financial Field, Philadelphia'},
+  {id:'24',home:'Norway',             away:'Senegal',            grp:'I',date:'Sat, Jun 20',time:'12:30 AM IST*',venue:'Lincoln Financial Field, Philadelphia'},
+  {id:'39',home:'France',             away:'Norway',             grp:'I',date:'Thu, Jun 25',time:'12:30 AM IST*',venue:'MetLife Stadium, New York'},
+  {id:'40',home:'Senegal',            away:'Iraq',               grp:'I',date:'Thu, Jun 25',time:'9:30 PM IST',  venue:'AT&T Stadium, Dallas'},
+  // GROUP J
+  {id:'9', home:'Argentina',          away:'Algeria',            grp:'J',date:'Sun, Jun 14',time:'9:30 PM IST',  venue:'Arrowhead Stadium, Kansas City'},
+  {id:'26',home:'Austria',            away:'Jordan',             grp:'J',date:'Sat, Jun 20',time:'9:30 PM IST',  venue:'AT&T Stadium, Dallas'},
+  {id:'41',home:'Argentina',          away:'Austria',            grp:'J',date:'Fri, Jun 26',time:'6:30 AM IST',  venue:'AT&T Stadium, Dallas'},
+  {id:'42',home:'Algeria',            away:'Jordan',             grp:'J',date:'Fri, Jun 26',time:'12:30 AM IST*',venue:'Hard Rock Stadium, Miami'},
+  // GROUP K
+  {id:'13',home:'Portugal',           away:'Uzbekistan',         grp:'K',date:'Mon, Jun 15',time:'12:30 AM IST*',venue:'Arrowhead Stadium, Kansas City'},
+  {id:'27',home:'Colombia',           away:'Congo DR',           grp:'K',date:'Sat, Jun 20',time:'12:30 AM IST*',venue:'Gillette Stadium, Boston'},
+  {id:'43',home:'Portugal',           away:'Colombia',           grp:'K',date:'Fri, Jun 26',time:'9:30 PM IST',  venue:'Lincoln Financial Field, Philadelphia'},
+  {id:'44',home:'Uzbekistan',         away:'Congo DR',           grp:'K',date:'Sat, Jun 27',time:'12:30 AM IST*',venue:'Arrowhead Stadium, Kansas City'},
+  // GROUP L
+  {id:'14',home:'England',            away:'Croatia',            grp:'L',date:'Mon, Jun 15',time:'6:30 AM IST',  venue:'AT&T Stadium, Dallas'},
+  {id:'28',home:'Croatia',            away:'Ghana',              grp:'L',date:'Sun, Jun 21',time:'6:30 AM IST',  venue:"Levi's Stadium, San Francisco"},
+  {id:'45',home:'England',            away:'Ghana',              grp:'L',date:'Sat, Jun 27',time:'6:30 AM IST',  venue:'Gillette Stadium, Boston'},
+  {id:'46',home:'Croatia',            away:'Panama',             grp:'L',date:'Sun, Jun 28',time:'12:30 AM IST*',venue:'MetLife Stadium, New York'},
+  // KNOCKOUT
+  {id:'k1',home:'Round of 32',        away:'Matches Begin',      grp:'R32', date:'Sun, Jun 28',time:'TBD',venue:'USA Venues',ko:true},
+  {id:'kf',home:'Winner SF-1',        away:'Winner SF-2',        grp:'FINAL',date:'Sun, Jul 19',time:'12:30 AM IST*',venue:'MetLife Stadium, New Jersey',final:true},
 ];
+// * = next day IST
 
 /* STATS */
 const STATS={goals:[{name:'Kylian Mbappé',team:'France',val:0},{name:'Erling Haaland',team:'Norway',val:0},{name:'Lionel Messi',team:'Argentina',val:0},{name:'Cristiano Ronaldo',team:'Portugal',val:0},{name:'Harry Kane',team:'England',val:0},{name:'Vinícius Jr',team:'Brazil',val:0},{name:'Lautaro Martínez',team:'Argentina',val:0},{name:'Bukayo Saka',team:'England',val:0}],assists:[{name:'Kevin De Bruyne',team:'Belgium',val:0},{name:'Pedri',team:'Spain',val:0},{name:'Jude Bellingham',team:'England',val:0},{name:'Antoine Griezmann',team:'France',val:0},{name:'Neymar Jr',team:'Brazil',val:0},{name:'Bernardo Silva',team:'Portugal',val:0},{name:'Joshua Kimmich',team:'Germany',val:0},{name:'Takefusa Kubo',team:'Japan',val:0}],cards:[{name:'Tournament begins June 11',team:'',val:0},{name:'Card data loads live',team:'',val:0}]};
@@ -740,7 +752,7 @@ const TEAM_INFO={
     ],
     subs:[{n:12,name:'Mignolet',pos:'GK',club:'Club Brugge',age:36},{n:14,name:'Doku',pos:'LW',club:'Man City',age:22},{n:17,name:'T. Hazard',pos:'LW',club:'Anderlecht',age:30},{n:22,name:'Openda',pos:'CF',club:'RB Leipzig',age:24}]},
 
-  'United States':{coach:'Mauricio Pochettino',formation:'4-3-3',color:':#002868',
+  'United States':{coach:'Mauricio Pochettino',formation:'4-3-3',color:'#002868',
     xi:[
       {row:'GK', players:[{n:1,name:'M. Turner',full:'Matt Turner',pos:'GK',club:'Crystal Palace',age:30,face:'matt-turner'}]},
       {row:'DEF',players:[{n:2,name:'S. Dest',full:'Sergiño Dest',pos:'RB',club:'PSV',age:24,face:'sergino-dest'},{n:6,name:'T. Ream',full:'Tim Ream',pos:'CB',club:'Fulham',age:37,face:'tim-ream'},{n:5,name:'C. Richards',full:'Chris Richards',pos:'CB',club:'Crystal Palace',age:25,face:'chris-richards'},{n:3,name:'A. Robinson',full:'Antonee Robinson',pos:'LB',club:'Fulham',age:27,face:'antonee-robinson'}]},
@@ -884,9 +896,9 @@ function openTeamModal(name){
   function buildBody(tab){
     let body='';
     body+=`<div class="modal-tabs">
-      <button class="modal-tab ${tab==='lineup'?'active':''}" onclick="switchModalTab('lineup','${name}')">Lineup &amp; Formation</button>
-      <button class="modal-tab ${tab==='squad'?'active':''}" onclick="switchModalTab('squad','${name}')">Full Squad</button>
-      <button class="modal-tab ${tab==='fixtures'?'active':''}" onclick="switchModalTab('fixtures','${name}')">Fixtures</button>
+      <button class="modal-tab ${tab==='lineup'?'active':''}" onclick="switchModalTab('lineup')">Lineup &amp; Formation</button>
+      <button class="modal-tab ${tab==='squad'?'active':''}" onclick="switchModalTab('squad')">Full Squad</button>
+      <button class="modal-tab ${tab==='fixtures'?'active':''}" onclick="switchModalTab('fixtures')">Fixtures</button>
     </div>`;
 
     if(tab==='lineup'){
@@ -967,7 +979,8 @@ function openTeamModal(name){
   document.body.style.overflow='hidden';
 }
 
-function switchModalTab(tab, name){
+function switchModalTab(tab){
+  const name=_curModalTeam;
   modalActiveTab=tab;
   const info=TEAM_INFO[name];
   const grpObj=GROUPS.find(g=>g.teams.some(t=>t.name===name));
@@ -981,9 +994,9 @@ function switchModalTab(tab, name){
 
   let body='';
   body+=`<div class="modal-tabs">
-    <button class="modal-tab ${tab==='lineup'?'active':''}" onclick="switchModalTab('lineup','${name}')">Lineup &amp; Formation</button>
-    <button class="modal-tab ${tab==='squad'?'active':''}" onclick="switchModalTab('squad','${name}')">Full Squad</button>
-    <button class="modal-tab ${tab==='fixtures'?'active':''}" onclick="switchModalTab('fixtures','${name}')">Fixtures</button>
+    <button class="modal-tab ${tab==='lineup'?'active':''}" onclick="switchModalTab('lineup')">Lineup &amp; Formation</button>
+    <button class="modal-tab ${tab==='squad'?'active':''}" onclick="switchModalTab('squad')">Full Squad</button>
+    <button class="modal-tab ${tab==='fixtures'?'active':''}" onclick="switchModalTab('fixtures')">Fixtures</button>
   </div>`;
 
   if(tab==='lineup'){
@@ -1042,6 +1055,34 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 /* ============================================================
    PANEL & NAV
    ============================================================ */
+function showPanel(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  const p=document.getElementById('panel-'+name);
+  if(p)p.classList.add('active');
+  btn.classList.add('active');
+  if(name==='groups')renderGroups(null);
+  if(name==='stats')renderStats(null);
+  if(name==='bracket')renderBracket();
+  if(name==='calendar')renderCalendar();
+  if(name==='teams')renderTeams();
+  if(name==='favs')renderFavs();
+}
+function clickTab(i){const b=document.querySelectorAll('.tab-btn');if(b[i])b[i].click();}
+function navTo(idx){
+  clickTab(idx);
+  setTimeout(()=>{
+    const el=document.getElementById('section-main');
+    if(el){const y=el.getBoundingClientRect().top+window.scrollY-64;window.scrollTo({top:y,behavior:'smooth'});}
+  },50);
+}
+function scrollToContent(){navTo(0);}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  if(!t)return;
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3200);
+}
 
 /* ============================================================
    API
@@ -1055,8 +1096,13 @@ async function getToken(){try{const e='wc26fan'+Date.now()+'@wc.app';const r=awa
    COUNTDOWN
    ============================================================ */
 function tickCd(){
+  // Opening: Mexico vs South Africa, Thu Jun 11 3:00 PM ET = Fri Jun 12 12:30 AM IST = 2026-06-11 19:00 UTC
   const diff=new Date('2026-06-11T19:00:00Z')-new Date();
-  if(diff<=0){document.getElementById('cd-status').textContent='Tournament Underway';document.getElementById('cd-display').innerHTML='<span style="color:var(--red);font-family:Bebas Neue;font-size:1.5rem;letter-spacing:3px">LIVE</span>';return;}
+  if(diff<=0){
+    document.getElementById('cd-status').textContent='Tournament Underway';
+    document.getElementById('cd-display').innerHTML='<span style="color:var(--red);font-family:Bebas Neue;font-size:1.5rem;letter-spacing:3px">LIVE NOW</span>';
+    return;
+  }
   document.getElementById('cd-d').textContent=String(Math.floor(diff/86400000)).padStart(2,'0');
   document.getElementById('cd-h').textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
   document.getElementById('cd-m').textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
@@ -1296,7 +1342,7 @@ function renderFavs(){
   c.innerHTML=html;
 }
 
-(name,btn){
+function showPanel(name,btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
